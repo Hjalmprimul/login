@@ -1,17 +1,14 @@
-// eslint-disable-next-line no-undef
 module.exports = {
+  root: true,
   env: {
-    browser: true,
-    es2021: true
+    node: true
   },
-  extends: ["eslint:recommended", "plugin:vue/essential"],
+  extends: ['plugin:vue/essential', '@vue/standard'],
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module"
+    parser: 'babel-eslint'
   },
-  plugins: ["vue"],
   rules: {
-    semi: ["error", "always"],
-    quotes: ["error", "double"]
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   }
-};
+}

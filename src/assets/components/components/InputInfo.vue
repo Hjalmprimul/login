@@ -1,11 +1,10 @@
 <template>
-    <div id="status-sign-in">
+    <div id="input-info">
 
     </div>
 </template>
 
 <script>
 export default {
-
 }
 </script>
