@@ -10,12 +10,12 @@
 
 <script>
 export default {
-    name: 'button-validate',
-    props: {
-        buttonText: {
-            type: String,
-            default: ''
-        }
+  name: 'button-validate',
+  props: {
+    buttonText: {
+      type: String,
+      default: ''
     }
+  }
 }
 </script>

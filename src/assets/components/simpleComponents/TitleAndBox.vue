@@ -3,12 +3,12 @@
         <fieldset class="form-group darkgray-text bold">
             <legend class="col-form-label pt-0">{{title}}</legend>
             <div>
-                <input type="text" 
-                       :placeholder="placeHolder" 
-                       class="form-control input-style mb-2" 
-                       v-model="input" 
+                <input v-bind:type="tipo"
+                       :placeholder="placeHolder"
+                       class="form-control input-style mb-2"
+                       v-model="input"
                        @input="changeString() & $emit('validar')">
-                <alert :alertText.sync="alertText"
+                <alert :alertT.sync="alertT"
                        v-show="alert"></alert>
             </div>
         </fieldset>
@@ -19,42 +19,47 @@
 import alert from './Alert.vue'
 
 export default {
-    name: 'title-box',
-    props: {
-        title: {
-            type: String,
-            default: ''
-        },
-        placeHolder: {
-            type: String,
-            default: ''
-        },
-        alertText:{
-            type: String,
-            default: ''
-        },
-        alert:{
-            type: Boolean,
-            default: false
-        }
+  name: 'title-box',
+  props: {
+    title: {
+      type: String,
+      default: ''
     },
-    components: {
-        alert
+    placeHolder: {
+      type: String,
+      default: ''
     },
-    data () {
-        return {
-            input: ''
-        }
+    alertText: {
+      type: String,
+      default: ''
     },
-    methods: {
-        changeString () {
-            let inp = '';
-            inp = this.input;
-            this.$emit('update:inputText', inp);
-        },
-        validate () {
-            this.$emit('validar');
-        }
+    alert: {
+      type: Boolean,
+      default: false
+    },
+    tipo: {
+      type: String,
+      default: 'text'
     }
+  },
+  components: {
+    alert
+  },
+  data () {
+    return {
+      input: '',
+      alertT: ''
+    }
+  },
+  methods: {
+    changeString () {
+      let inp = ''
+      inp = this.input
+      this.$emit('update:inputText', inp)
+    }
+  },
+  beforeUpdate () {
+    this.alertT = this.alertText
+  }
 }
 </script>

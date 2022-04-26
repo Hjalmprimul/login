@@ -4,23 +4,24 @@
             <h2 class="greenish-blue-text bolder">Ingresa a tu cuenta</h2>
             <div class="inline-alert"></div>
             <!-- Email -->
-            <title-box :title.sync="emailTitle" 
-                       :placeHolder.sync="emailPH" 
+            <title-box :title.sync="emailTitle"
+                       :placeHolder.sync="emailPH"
                        :alertText.sync="emailAlertText"
                        :alert.sync="alertEmail"
                        @update:inputText="updateEmailText"
-                       @validar="emailValidate()"
-                       ></title-box>
+                       @validar="emailValidate()">
+            </title-box>
             <!-- Email END -->
             <!-- Contraseña -->
-            <title-box :title.sync="passTitle" 
-                       :placeHolder.sync="passPH" 
+            <title-box :title.sync="passTitle"
+                       :placeHolder.sync="passPH"
                        :alertText.sync="passAlertText"
                        :alert.sync="alertPass"
                        @update:inputText="updatePassText"
                        @validar="passValidate()"
                        class="pass-title-box"
-                       ></title-box>
+                       :tipo.sync="inputType">
+            </title-box>
             <!-- Contraseña END -->
             <!-- Forgot Pass -->
             <div class="p1-0 mb-2 link-decoration" @click="$emit('update:ingresa', 2)">
@@ -35,94 +36,118 @@
 </template>
 
 <script>
+// Imports
 import buttonValidate from './simpleComponents/ButtonValidate.vue'
 import titleBox from './simpleComponents/TitleAndBox.vue'
 
 export default {
   name: 'status-login',
+
+  // Props from App.vue
   props: {
     ingresa: {
       type: Number,
       default: 1
     }
   },
+
   data () {
     return {
-        // Defaults
-        buttonText: 'Ingresa a mi cuenta',
-        emailTitle: 'Email',
-        emailPH: 'Ej: usuario@mail.com',
-        passTitle: 'Contraseña',
-        passPH: 'Escribe tu contraseña',
-        
-        // Inputs
-        emailInputText: '',
-        passInputText: '',
+      // Defaults
+      buttonText: 'Ingresa a mi cuenta',
+      emailTitle: 'Email',
+      emailPH: 'Ej: usuario@mail.com',
+      passTitle: 'Contraseña',
+      passPH: 'Escribe tu contraseña',
 
-        // Alerts
-        alertEmail: false,
-        alertPass: false,
-        emailAlertText: '',
-        passAlertText: ''
+      // Inputs
+      inputType: 'password',
+      emailInputText: '',
+      passInputText: '',
+
+      // Alerts
+      clickButton: false,
+      alertEmail: false,
+      alertPass: false,
+      emailAlertText: '',
+      passAlertText: ''
     }
   },
+
   components: {
-      buttonValidate,
-      titleBox
+    buttonValidate,
+    titleBox
   },
+
   methods: {
+    // Activa la Validacion (Click ValidateButton)
     validate () {
+      this.clickButton = true
       this.emailValidate()
       this.passValidate()
     },
+
+    // Verifica si el String contiene solo Letras
+    esPalabra (str) {
+      // eslint-disable-next-line prefer-regex-literals
+      const regExp = new RegExp('^[A-Z]+$', 'i')
+      return regExp.test(str)
+    },
+
+    // Revertir cadena
+    revertir (str) {
+      return str.split('').reverse().join('')
+    },
+
+    // Valida Email
     emailValidate () {
-      let email = this.emailInputText
+      const email = this.emailInputText
+      // eslint-disable-next-line prefer-regex-literals
+      const regExp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 
-      if (email.length === 0) {
-        this.emailAlertText = 'Necesitamos tu email.'
-        this.alertEmail = true
+      if (this.clickButton) {
+        if (email.length === 0) {
+          this.emailAlertText = 'Necesitamos tu email.'
+          this.alertEmail = true
+        } else {
+          this.emailAlertText = 'El email ingresado no es correcto.'
+          this.alertEmail = true
 
-      } else if (email.length > 0) {
-        this.emailAlertText = 'El email ingresado no es correcto.'
-        this.alertEmail = true
-
-        if (email.includes('@') && email.slice(0, email.indexOf('@') > 0)) {
-          email = email.slice(email.indexOf('@') + 1);
-
-          if (email.slice(0, email.indexOf('.')).length >= 1 && email.includes('.')) {
-            email = email.slice(email.indexOf('.') +1)
-
-            if (email.length >= 2){
-              this.alertEmail = false
-            }
+          if (regExp.test(email)) {
+            this.alertEmail = false
           }
         }
       }
-
     },
+
+    // Valida el password
     passValidate () {
-      let pass = this.passInputText
-      
-      if (pass.length === 0){
-        console.log('entro en el passvalidate')
-        this.passAlertText = 'Necesitamos tu contraseña.'
-        this.alertPass = true
+      const pass = this.passInputText
 
-      } else if (pass.length >= 1){
-        this.passAlertText = 'La contraseña no tiene un formato válido.'
-        this.alertPass = true
+      if (this.clickButton) {
+        if (pass.length === 0) {
+          this.passAlertText = 'Necesitamos tu contraseña.'
+          this.alertPass = true
+        } else if (pass.length >= 1) {
+          this.passAlertText = 'La contraseña no tiene un formato válido.'
+          this.alertPass = true
 
-        if(pass.length >= 6){
-          this.alertPass = false
+          if (pass.length >= 6) {
+            this.alertPass = false
+          }
         }
       }
     },
+
+    // Modifica el valor del emailInputText
     updateEmailText (inp) {
-      this.emailInputText = inp;
+      this.emailInputText = inp
     },
+
+    // Modifica el valor del passInputText
     updatePassText (inp) {
-      this.passInputText = inp;
+      this.passInputText = inp
     }
-  },
+  }
 }
 </script>
