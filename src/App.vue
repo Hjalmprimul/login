@@ -97,7 +97,7 @@ a{
 /* Class */
 .conteiner{
   display: grid;
-  grid-template-columns: 32.5% 66.5%;
+  grid-template-columns: 32.5% 67.5%;
 }
 
 /* Right part of grid */
