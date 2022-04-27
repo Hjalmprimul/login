@@ -79,7 +79,7 @@ export default {
       if (this.ingresa === 2) {
         this.msg = '¿Ya tienes una cuenta de Wobiz?'
         this.textButton = 'Ingresa'
-      } else {
+      } else if (this.ingresa === 1) {
         this.msg = '¿No tienes una cuenta de Wobiz?'
         this.textButton = 'Crea una cuenta'
       }
@@ -215,7 +215,7 @@ a{
   .alert-text{
     font-size: 14px;
     font-weight: 400;
-    text-indent: 15px;
+    padding-left: 15px;
   }
 
 /* Media Responsive */

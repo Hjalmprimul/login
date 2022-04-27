@@ -16,7 +16,7 @@
             <button-validate :buttonText.sync="buttonText"
                              @click="Validate()"></button-validate>
             <!-- Button END -->
-            <!-- Back Pass -->
+            <!-- Back -->
             <div class="p1-0 mt-2 mb-2 link-decoration text-center" @click="$emit('update:ingresa', 1)">
                 <a class="gray-text forgot-pass">Volver</a>
             </div>

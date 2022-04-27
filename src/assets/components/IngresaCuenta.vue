@@ -2,7 +2,7 @@
     <div id="status-login">
         <form>
             <h2 class="greenish-blue-text bolder">Ingresa a tu cuenta</h2>
-            <div class="inline-alert"></div>
+            <alert-box v-if="alertStatus" :alertT.sync="alertStatusText"></alert-box>
             <!-- Email -->
             <title-box :title.sync="emailTitle"
                        :placeHolder.sync="emailPH"
@@ -39,6 +39,8 @@
 // Imports
 import buttonValidate from './simpleComponents/ButtonValidate.vue'
 import titleBox from './simpleComponents/TitleAndBox.vue'
+import axios from 'axios'
+import alertBox from './simpleComponents/Alert.vue'
 
 export default {
   name: 'status-login',
@@ -59,6 +61,7 @@ export default {
       emailPH: 'Ej: usuario@mail.com',
       passTitle: 'Contraseña',
       passPH: 'Escribe tu contraseña',
+      datosValidados: false,
 
       // Inputs
       inputType: 'password',
@@ -70,13 +73,16 @@ export default {
       alertEmail: false,
       alertPass: false,
       emailAlertText: '',
-      passAlertText: ''
+      passAlertText: '',
+      alertStatus: false,
+      alertStatusText: 'Tu email o contraseña son incorrectos. Revísalos y vuelve a intentar.'
     }
   },
 
   components: {
     buttonValidate,
-    titleBox
+    titleBox,
+    alertBox
   },
 
   methods: {
@@ -85,13 +91,23 @@ export default {
       this.clickButton = true
       this.emailValidate()
       this.passValidate()
-    },
+      this.datosValidados = !this.alertEmail && !this.alertPass
+      if (this.datosValidados) {
+        axios.post('https://jsonplaceholder.typicode.com/users', {
+          Username: this.emailInputText,
+          Password: this.passInputText
+        }).then((response) => {
+          const status = response.status
 
-    // Verifica si el String contiene solo Letras
-    esPalabra (str) {
-      // eslint-disable-next-line prefer-regex-literals
-      const regExp = new RegExp('^[A-Z]+$', 'i')
-      return regExp.test(str)
+          if (status === 201) {
+            this.alertStatus = true
+          } else if (status === 200) {
+            alert('Success')
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
     },
 
     // Revertir cadena
