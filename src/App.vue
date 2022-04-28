@@ -1,8 +1,8 @@
 <template>
   <div id="app">
 
-    <!-- Conteiner -->
-    <div class="conteiner">
+    <!-- Container-app -->
+    <div class="container-app">
 
       <!-- Left Column -->
       <div class="izq vh-100" @mouseover="changeQuestLogin()">
@@ -10,16 +10,16 @@
         <!-- Logo -->
         <div class="logo">
           <a href="https://www.wobiz.com/">
-            <img src="./assets/img/logo.svg" alt="">
+            <img src="./assets/logo.svg" alt="">
           </a>
         </div>
         <!-- End Logo -->
 
-        <status-login :ingresa.sync="ingresa" v-if="ingresa == 1"></status-login>
+        <login :ingresa.sync="ingresa" v-if="ingresa == 1"></login>
 
-        <forgot-pass :ingresa.sync="ingresa" v-else-if="ingresa == 2"></forgot-pass>
+        <recovery :ingresa.sync="ingresa" v-else-if="ingresa == 2"></recovery>
 
-        <status-sign-in v-else></status-sign-in>
+        <signup v-else></signup>
 
       </div>
       <!-- End Left Column -->
@@ -39,15 +39,16 @@
       <!-- End Right Column -->
 
     </div>
-    <!-- End Conteiner -->
+    <!-- End Container-app -->
 
   </div>
 </template>
 
 <script>
-import statusLogin from './assets/components/IngresaCuenta'
-import statusSignIn from './assets/components/RegistraCuenta.vue'
-import forgotPass from './assets/components/ForgotPassword.vue'
+// Imports
+import login from './components/Login.vue'
+import signup from './components/Signup.vue'
+import recovery from './components/Recovery.vue'
 
 export default {
   name: 'app',
@@ -58,12 +59,15 @@ export default {
       textButton: 'Crea una cuenta'
     }
   },
+
   components: {
-    'status-login': statusLogin,
-    'status-sign-in': statusSignIn,
-    'forgot-pass': forgotPass
+    login,
+    signup,
+    recovery
   },
+
   methods: {
+
     changeStatus () {
       if (this.ingresa === 1) {
         this.ingresa = 3
@@ -75,6 +79,7 @@ export default {
         this.textButton = 'Crea una cuenta'
       }
     },
+
     changeQuestLogin () {
       if (this.ingresa === 2) {
         this.msg = '¿Ya tienes una cuenta de Wobiz?'
@@ -87,152 +92,3 @@ export default {
   }
 }
 </script>
-
-<style>
-/* Components */
-body{
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-}
-a{
-    text-decoration: none;
-}
-
-/* Class */
-.conteiner{
-  display: grid;
-  grid-template-columns: 32.5% 67.5%;
-}
-
-/* Right part of grid */
-.der{
-  background: url(./assets/img/loginImage.png) no-repeat right center/cover;
-  width: 100%;
-}
-  /* Text Change Status and Button */
-  .position-relative{
-    position: relative!important;
-  }
-  .change-status{
-    padding-top: 42px;
-    position: absolute;
-    right: 7%;
-    display: flex;
-  }
-  .change-status .quest-login{
-    font-size: 14px;
-    margin: 6.5px 13px 13px 0;
-    color: white;
-  }
-
-/* Left part of grid */
-.izq{
-  padding: 30px 50px 50px 35px;
-}
-
-  /* Text colors */
-  .greenish-blue-text{ color: #163a49; }
-  .gray-text{ color: #969696; }
-  .darkgray-text{ color: #363636; }
-
-  /* Logo */
-  .izq .logo a img{
-    width: 180px;
-  }
-
-  /* Component Title */
-  .bolder{
-    font-weight: 700;
-    font-size: 26px;
-    margin-top: 37px;
-    margin-bottom: 22px;
-  }
-  .h2-margin{
-  margin-top: 38px;
-  }
-
-  /* Title-Box */
-  .bold{
-    font-weight: bold;
-  }
-    /* Legend Box */
-    .col-form-label{
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    /* Input Box */
-    .input-style{
-      font-size: 16px;
-      height: calc(1.5em + 0.75rem + 16px)!important;
-    }
-    .form-control{
-      margin-bottom: 1rem;
-    }
-
-  /* Forgot Pass Link */
-  .link-decoration{
-    text-decoration: underline!important;;
-  }
-  .link-decoration :hover{
-    color: #363636;
-  }
-  .forgot-pass{
-    font-size: 14px!important;
-    cursor: pointer;
-  }
-    /* Forgot Pass Text */
-    .bigger{
-      font-size: 16px;
-    }
-
-  /* Button Validate */
-  .btn-validate{
-    margin-top: 15px;
-    height: 45px!important;
-    text-transform: none!important;
-    font-weight: 700!important;
-    width: 100%;
-    background-color: #1bb8e3;
-    border-color: #1bb8e3;
-  }
-  .col :hover{
-    background-color: #2e7492;
-    border-color: #2e7492;
-  }
-  .button-text{
-    font-weight: 700;
-    font-size: 13px;
-  }
-
-  /* Alerts */
-  .alert{
-    color: white;
-    background-color: #e85837;
-    border: none;
-    padding: 10px;
-    margin-bottom: 1rem;
-  }
-  .alert-text{
-    font-size: 14px;
-    font-weight: 400;
-    padding-left: 15px;
-  }
-
-/* Media Responsive */
-@media (max-width: 993px) {
-  .conteiner{
-    grid-template-columns: 50% 50%;
-  }
-  .change-status{
-    display: none;
-  }
-}
-@media (max-width: 768px){
-  .conteiner{
-    grid-template-columns: 1fr;
-  }
-  .der{
-    display: none;
-  }
-}
-</style>

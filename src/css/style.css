@@ -1,0 +1,172 @@
+/* Components */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Class */
+.container-app {
+    display: grid;
+    grid-template-columns: 32.5% 67.5%;
+}
+
+/* Right part of grid */
+.der {
+    background: url(../assets/loginImage.png) no-repeat right center/cover;
+    width: 100%;
+}
+
+/* Text Change Status and Button */
+.position-relative {
+    position: relative !important;
+}
+
+.change-status {
+    padding-top: 42px;
+    position: absolute;
+    right: 8.5%;
+    display: flex;
+}
+
+.change-status .quest-login {
+    font-size: 13px;
+    margin: 6.5px 13px 13px 0;
+    color: white;
+}
+
+/* Left part of grid */
+.izq {
+    padding: 30px 50px 50px 35px;
+}
+
+/* Text colors */
+.greenish-blue-text {
+    color: #163a49;
+}
+
+.gray-text {
+    color: #969696;
+}
+
+.darkgray-text {
+    color: #363636;
+}
+
+/* Logo */
+.izq .logo a img {
+    width: 180px;
+}
+
+/* Component Title */
+.bolder {
+    font-weight: 700;
+    font-size: 26px;
+    margin-top: 37px;
+    margin-bottom: 22px;
+}
+
+.h2-margin {
+    margin-top: 38px;
+}
+
+/* Title-Box */
+.bold {
+    font-weight: bold;
+}
+
+/* Legend Box */
+.col-form-label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Input Box */
+.input-style {
+    font-size: 16px;
+    height: calc(1.5em + 0.75rem + 16px) !important;
+}
+
+.form-control {
+    margin-bottom: 1rem;
+}
+
+/* Forgot Pass Link */
+.link-decoration {
+    text-decoration: underline !important;
+    ;
+}
+
+.link-decoration :hover {
+    color: #363636;
+}
+
+.forgot-pass {
+    font-size: 14px !important;
+    cursor: pointer;
+}
+
+/* Forgot Pass Text */
+.bigger {
+    font-size: 16px;
+}
+
+/* Button Validate */
+.btn-validate {
+    margin-top: 15px;
+    height: 45px !important;
+    text-transform: none !important;
+    font-weight: 700 !important;
+    width: 100%;
+    background-color: #1bb8e3;
+    border-color: #1bb8e3;
+}
+
+.col :hover {
+    background-color: #2e7492;
+    border-color: #2e7492;
+}
+
+.button-text {
+    font-weight: 500;
+    font-size: 13px;
+    height: 35px;
+}
+
+/* Alerts */
+.alert {
+    color: white;
+    background-color: #e85837;
+    border: none;
+    padding: 10px;
+    margin-bottom: 1rem;
+}
+
+.alert-text {
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 15px;
+}
+
+/* Media Responsive */
+@media (max-width: 993px) {
+    .container {
+        grid-template-columns: 50% 50%;
+    }
+
+    .change-status {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .der {
+        display: none;
+    }
+}

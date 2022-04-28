@@ -13,6 +13,8 @@ module.exports = {
     allowShortCircuit: 'off',
     allowTernary: 'off',
     allowTaggedTemplates: 'off',
-    enforceForJSX: 'off'
+    enforceForJSX: 'off',
+    'no-unused-vars': 'off',
+    'prefer-regex-literals': 'off'
   }
 }
