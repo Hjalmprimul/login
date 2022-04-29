@@ -34,7 +34,7 @@
                    :alertText.sync="passAlertText"
                    :alert.sync="alertPass"
                    @update:inputText="updatePassText"
-                   @validar="passValidate()"
+                   @validar="regexPassword()"
                    :tipo.sync="inputType">
         </title-box>
         <!-- Contraseña END -->
@@ -116,7 +116,7 @@ export default {
 
       // Valida los datos de entrada
       this.emailValidate()
-      this.passValidate()
+      this.regexPassword()
       this.nameValidate()
 
       this.datosValidados = !this.alertEmail && !this.alertPass && !this.alertName
@@ -134,6 +134,14 @@ export default {
             console.log('Wrong username')
           }
         })
+      }
+    },
+
+    regexPassword (){
+      const regExp = new RegExp(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)
+      if (!regExp.test(this.passInputText) && this.clickButton) {
+        this.alertPass = true
+        this.passAlertText = 'Ingresa una contraseña que tenga más de 8 caracteres, mayúsculas, minúsculas y al menos un número.'
       }
     }
 
