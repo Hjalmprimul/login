@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:12.22.1-alpine3.11
 
 RUN npm install -g http-server
 
@@ -9,6 +9,8 @@ WORKDIR /login
 COPY packge*.json ./
 
 COPY . .
+
+RUN npm i
 
 RUN npm run build
 

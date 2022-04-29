@@ -46,9 +46,9 @@
 
 <script>
 // Imports
-import login from './components/Login.vue'
-import signup from './components/Signup.vue'
-import recovery from './components/Recovery.vue'
+import login from './layouts/Login.vue'
+import signup from './layouts/Signup.vue'
+import recovery from './layouts/Recovery.vue'
 
 export default {
   name: 'app',

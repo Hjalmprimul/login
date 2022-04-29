@@ -66,9 +66,9 @@
 
 <script>
 // import components
-import buttonValidate from '../layouts/ButtonValidate.vue'
-import titleBox from '../layouts/TitleAndBox.vue'
-import alertBox from '../layouts/Alert.vue'
+import buttonValidate from '../components/ButtonValidate.vue'
+import titleBox from '../components/TitleAndBox.vue'
+import alertBox from '../components/Alert.vue'
 
 // Dependencies
 import axios from 'axios'
