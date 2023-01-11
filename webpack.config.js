@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true
     }),
     new HtmlWebpackPlugin({
-      filename: './index_prod.html',
+      filename: './index.html',
       template: './index.html',
       inject: false
     })
