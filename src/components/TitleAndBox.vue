@@ -9,7 +9,8 @@
                        v-model="input"
                        @input="changeString() & $emit('validar')">
                 <alert :alertT.sync="alertT"
-                       v-show="alert"></alert>
+                       v-show="alert">
+                </alert>
             </div>
         </fieldset>
     </div>
